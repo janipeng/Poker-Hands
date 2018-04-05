@@ -27,9 +27,8 @@ class PokerHands implements Comparable<PokerHands> {
   private void calculateRank() {
     for (int index = 0; index < cards.size() - 1; index++) {
       if (cards.get(index).getValue() == cards.get(index + 1).getValue()) {
-        this.rank = 1;
+        this.rank++;
         this.rankValue = cards.get(index).getValue();
-        return;
       }
     }
   }
@@ -38,7 +37,7 @@ class PokerHands implements Comparable<PokerHands> {
   public int compareTo(PokerHands poker) {
     if (isDiffRank(poker)) {
       return this.rank - poker.rank;
-    } else if (rankValue != poker.rankValue){
+    } else if (rankValue != poker.rankValue) {
       return rankValue - poker.rankValue;
     }
     return range(0, 5)
