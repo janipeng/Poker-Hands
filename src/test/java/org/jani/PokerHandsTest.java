@@ -27,6 +27,15 @@ public class PokerHandsTest {
     assertThat(result, is("Nobody wins."));
   }
 
+  @Test
+  public void onePokerHasAPair() throws Exception {
+    PokerHands pokerHands1 = new PokerHands("Player 1", "2H 3D 5S 2C 6D");
+    PokerHands pokerHands2 = new PokerHands("Player 2", "2C 3H 5S 4C 8H");
+
+    String result = pokerHands1.battle(pokerHands2);
+
+    assertThat(result, is("Player 1 wins."));
+  }
 }
 
 
