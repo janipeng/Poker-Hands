@@ -1,3 +1,6 @@
 
 .idea/
 output/
+.gradle/
+*.iml
+out/
