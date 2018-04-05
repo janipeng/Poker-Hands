@@ -2,7 +2,6 @@ package org.jani;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import static java.util.Arrays.stream;
 import static java.util.Optional.ofNullable;
@@ -14,29 +13,33 @@ class PokerHands implements Comparable<PokerHands> {
   private int rank;
   private List<Card> cards = new ArrayList<>();
   private String name;
+  private int rankValue;
 
   PokerHands(String name, String input) {
     this.name = name;
     cards = stream(input.split(" "))
         .map(Card::new)
-        .sorted()
+        .sorted((o1, o2) -> o2.getValue() - o1.getValue())
         .collect(toList());
-    this.rank = calculateRank();
+    calculateRank();
   }
 
-  private int calculateRank() {
+  private void calculateRank() {
     for (int index = 0; index < cards.size() - 1; index++) {
       if (cards.get(index).getValue() == cards.get(index + 1).getValue()) {
-        return 1;
+        this.rank = 1;
+        this.rankValue = cards.get(index).getValue();
+        return;
       }
     }
-    return 0;
   }
 
   @Override
   public int compareTo(PokerHands poker) {
     if (isDiffRank(poker)) {
       return this.rank - poker.rank;
+    } else if (rankValue != poker.rankValue){
+      return rankValue - poker.rankValue;
     }
     return range(0, 5)
         .map(index -> cards.get(index).compareTo(poker.cards.get(index)))
