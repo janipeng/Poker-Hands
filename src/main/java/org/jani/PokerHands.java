@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 import static java.util.Arrays.stream;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.range;
 
 class PokerHands implements Comparable<PokerHands> {
 
@@ -34,13 +35,17 @@ class PokerHands implements Comparable<PokerHands> {
 
   @Override
   public int compareTo(PokerHands poker) {
-    if (this.rank != poker.rank) {
-      return rank - poker.rank;
+    if (isDiffRank(poker)) {
+      return this.rank - poker.rank;
     }
-    return IntStream.range(0, 5)
+    return range(0, 5)
         .map(index -> cards.get(index).compareTo(poker.cards.get(index)))
         .filter(integer -> integer != 0)
         .findFirst().orElse(0);
+  }
+
+  private boolean isDiffRank(PokerHands poker) {
+    return this.rank != poker.rank;
   }
 
   public String battle(PokerHands poker) {
