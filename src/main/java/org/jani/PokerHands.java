@@ -27,4 +27,15 @@ class PokerHands implements Comparable<PokerHands>  {
             .filter(integer -> integer != 0)
             .findFirst().orElse(0);
   }
+
+  public String vs(PokerHands pokerHands2) {
+    int compareTo = this.compareTo(pokerHands2);
+    if (compareTo > 0) {
+      return this.name + " wins.";
+    }
+    if (compareTo < 0) {
+      return pokerHands2.name + " wins.";
+    }
+    return "";
+  }
 }
