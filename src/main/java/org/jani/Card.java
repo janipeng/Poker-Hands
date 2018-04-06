@@ -2,18 +2,20 @@ package org.jani;
 
 import java.util.Optional;
 
+import static java.lang.Integer.valueOf;
 import static java.util.Arrays.stream;
 
 public class Card implements Comparable<Card>{
   private int value;
 
-  public Card(String card) {
-    String[] splitCard = card.split("");
-    this.value = calValue(splitCard[0]);
+  Card(String card) {
+    this.value = calValue(card.split("")[0]);
   }
 
   private int calValue(String value) {
-    return OfficerCards.findCard(value).map(officerCards -> officerCards.value).orElseGet(() -> Integer.valueOf(value));
+    return OfficerCards.findCard(value)
+        .map(officerCards -> officerCards.value)
+        .orElseGet(() -> valueOf(value));
   }
 
   @Override
@@ -33,7 +35,9 @@ public class Card implements Comparable<Card>{
     }
 
     public static Optional<OfficerCards> findCard(String value) {
-      return stream(OfficerCards.values()).filter(officerCard -> officerCard.symbol.equals(value)).findFirst();
+      return stream(OfficerCards.values())
+          .filter(officerCard -> officerCard.symbol.equals(value))
+          .findFirst();
     }
   }
 }
