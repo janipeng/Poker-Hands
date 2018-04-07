@@ -98,6 +98,16 @@ public class PokerTest {
 
     assertThat(result, is("Player 2 wins."));
   }
+
+  @Test
+  public void onePokerIsConsecutive_onePokerIsThreeOfAKing() throws Exception {
+    Poker pokerA = new Poker("Player 1", "2H 4D 5H 6D 3C");
+    Poker pokerB = new Poker("Player 2", "5D 5H 5C 2C 9H");
+
+    String result = pokerComparer.compare(pokerA, pokerB);
+
+    assertThat(result, is("Player 1 wins."));
+  }
 }
 
 

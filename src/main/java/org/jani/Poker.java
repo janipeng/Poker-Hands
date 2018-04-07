@@ -71,4 +71,16 @@ class Poker {
   Rank getRank() {
     return rank;
   }
+
+  public int getMaxValue() {
+    return this.cards.get(0).getValue();
+  }
+
+  public int getMinValue() {
+    return this.cards.get(cards.size() - 1).getValue();
+  }
+
+  public int differenceValue() {
+    return this.getMaxValue() - this.getMinValue();
+  }
 }
