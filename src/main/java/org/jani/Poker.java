@@ -1,5 +1,6 @@
 package org.jani;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,12 @@ class Poker {
     this.cards = stream(input.split(SPACE))
         .map(buildCard())
         .sorted(reverseOrder())
+        .sorted(new Comparator<Card>() {
+          @Override
+          public int compare(Card o1, Card o2) {
+            return counts.get(o2.getValue()) - counts.get(o1.getValue());
+          }
+        })
         .collect(toList());
     this.rank = calculateRank();
   }
