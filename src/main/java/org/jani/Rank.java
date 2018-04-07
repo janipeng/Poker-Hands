@@ -3,13 +3,14 @@ package org.jani;
 import static java.util.Arrays.stream;
 import static java.util.Comparator.reverseOrder;
 import static org.jani.QualityBuilder.byModel;
+import static org.jani.QualityBuilder.consecutive;
 
 public enum Rank {
   HIGH_CARD(byModel("1 1 1 1 1")),
   ONE_PAIR(byModel("2 1 1 1")),
   TWO_PAIR(byModel("2 2 1")),
   THREE_OF_A_KING(byModel("3 1 1")),
-  CONSECUTIVE(QualityBuilder.consecutive());
+  STRAIGHT(consecutive());
 
   private Qualifier qualifier;
 
