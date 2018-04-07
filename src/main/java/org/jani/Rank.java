@@ -7,7 +7,8 @@ import static org.jani.QualityBuilder.byModel;
 public enum Rank {
   HIGH_CARD(byModel("1 1 1 1 1")),
   ONE_PAIR(byModel("2 1 1 1")),
-  TWO_PAIR(byModel("2 2 1"));
+  TWO_PAIR(byModel("2 2 1")),
+  THREE_OF_A_KING(byModel("3 1 1"));
 
   private Qualifier qualifier;
 
