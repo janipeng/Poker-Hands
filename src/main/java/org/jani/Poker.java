@@ -25,14 +25,13 @@ class Poker {
     this.cards = stream(input.split(SPACE))
         .map(buildCard())
         .sorted(reverseOrder())
-        .sorted(new Comparator<Card>() {
-          @Override
-          public int compare(Card o1, Card o2) {
-            return counts.get(o2.getValue()) - counts.get(o1.getValue());
-          }
-        })
+        .sorted(buildCardComparatorByValueCount())
         .collect(toList());
     this.rank = calculateRank();
+  }
+
+  private Comparator<Card> buildCardComparatorByValueCount() {
+    return (o1, o2) -> counts.get(o2.getValue()) - counts.get(o1.getValue());
   }
 
   private Function<String, Card> buildCard() {
