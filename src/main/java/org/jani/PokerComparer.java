@@ -11,11 +11,14 @@ class PokerComparer {
   private static final String DRAW = "It is a draw.";
 
   String compare(Poker pokerA, Poker pokerB) {
-    int result = range(0, 5)
-        .map(compareByCard(pokerA, pokerB))
-        .filter(compareResult -> compareResult != 0)
-        .findFirst()
-        .orElse(0);
+    int result = pokerA.getRank().compareTo(pokerB.getRank());
+    if (result == 0) {
+      result = range(0, 5)
+          .map(compareByCard(pokerA, pokerB))
+          .filter(compareResult -> compareResult != 0)
+          .findFirst()
+          .orElse(0);
+    }
 
     return ofNullable(winner(pokerA, pokerB, result))
         .map(name -> name + WINS)

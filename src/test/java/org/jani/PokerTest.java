@@ -38,4 +38,17 @@ public class PokerTest {
 
     assertThat(result, is("It is a draw."));
   }
+
+  @Test
+  public void onePair_oneHighCard() throws Exception {
+    Poker pokerA = new Poker("Player 1", "2H 5D 3H AD 9C");
+    Poker pokerB = new Poker("Player 2", "2D 5H JC 2C 9H");
+
+    String result = pokerComparer.compare(pokerA, pokerB);
+
+    assertThat(result, is("Player 2 wins."));
+  }
+
 }
+
+

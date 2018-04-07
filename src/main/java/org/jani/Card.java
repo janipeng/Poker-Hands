@@ -23,6 +23,10 @@ public class Card implements Comparable<Card>{
     return this.value - card.value;
   }
 
+  public int getValue() {
+    return value;
+  }
+
   private enum OfficerCards {
     TEN(10, "T"), JACK(11, "J"), QUEEN(12, "Q"), KING(13, "K"), ACE(14, "A");
 
