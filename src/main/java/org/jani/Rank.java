@@ -1,9 +1,7 @@
 package org.jani;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.function.Predicate;
-
+import static java.util.Arrays.stream;
+import static java.util.Comparator.reverseOrder;
 import static org.jani.QualityBuilder.byModel;
 
 public enum Rank {
@@ -17,11 +15,10 @@ public enum Rank {
   }
 
   public static Rank getRank(Poker poker) {
-    return Arrays.stream(Rank.values()).sorted(Comparator.reverseOrder()).filter(new Predicate<Rank>() {
-      @Override
-      public boolean test(Rank rank) {
-        return rank.qualifier.qualify(poker);
-      }
-    }).findFirst().orElse(HIGH_CARD);
+    return stream(Rank.values())
+        .sorted(reverseOrder())
+        .filter(rank -> rank.qualifier.qualify(poker))
+        .findFirst()
+        .orElse(HIGH_CARD);
   }
 }

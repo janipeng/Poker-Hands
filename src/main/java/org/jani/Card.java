@@ -23,7 +23,7 @@ public class Card implements Comparable<Card>{
     return this.value - card.value;
   }
 
-  public int getValue() {
+  int getValue() {
     return value;
   }
 

@@ -3,6 +3,7 @@ package org.jani;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import static java.util.Arrays.stream;
 import static java.util.Collections.reverseOrder;
@@ -21,15 +22,23 @@ class Poker {
   Poker(String name, String input) {
     this.name = name;
     this.cards = stream(input.split(SPACE))
-        .map(cardStr -> {
-          Card card = new Card(cardStr);
-          counts.put(card.getValue(),
-              ofNullable(counts.get(card.getValue())).orElse(0) + 1);
-          return card;
-        })
+        .map(buildCard())
         .sorted(reverseOrder())
         .collect(toList());
     this.rank = calculateRank();
+  }
+
+  private Function<String, Card> buildCard() {
+    return cardStr -> {
+      Card card = new Card(cardStr);
+      buildCardCounts(card);
+      return card;
+    };
+  }
+
+  private void buildCardCounts(Card card) {
+    counts.put(card.getValue(),
+        ofNullable(counts.get(card.getValue())).orElse(0) + 1);
   }
 
   private Rank calculateRank() {
@@ -44,7 +53,7 @@ class Poker {
     return name;
   }
 
-  public String model() {
+  String model() {
     return this.counts
         .values()
         .stream()
@@ -53,7 +62,7 @@ class Poker {
         .collect(joining(SPACE));
   }
 
-  public Rank getRank() {
+  Rank getRank() {
     return rank;
   }
 }
