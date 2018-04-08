@@ -24,14 +24,17 @@ class Poker {
     this.name = name;
     this.cards = stream(input.split(SPACE))
         .map(buildCard())
-        .sorted(reverseOrder())
-        .sorted(buildCardComparatorByValueCount())
+        .sorted(buildCardComparator())
         .collect(toList());
     this.rank = calculateRank();
   }
 
-  private Comparator<Card> buildCardComparatorByValueCount() {
-    return (o1, o2) -> counts.get(o2.getValue()) - counts.get(o1.getValue());
+  private Comparator<Card> buildCardComparator() {
+    return (o1, o2) -> {
+      int countCompare = counts.get(o2.getValue()) - counts.get(o1.getValue());
+      return countCompare == 0 ?
+          o2.getValue() - o1.getValue() : countCompare;
+    };
   }
 
   private Function<String, Card> buildCard() {
@@ -72,15 +75,15 @@ class Poker {
     return rank;
   }
 
-  public int getMaxValue() {
+  private int getMaxValue() {
     return this.cards.get(0).getValue();
   }
 
-  public int getMinValue() {
+  private int getMinValue() {
     return this.cards.get(cards.size() - 1).getValue();
   }
 
-  public int differenceValue() {
+  int differenceValue() {
     return this.getMaxValue() - this.getMinValue();
   }
 }

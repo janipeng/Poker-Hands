@@ -30,7 +30,7 @@ public class Card implements Comparable<Card>{
     return value;
   }
 
-  public String getSuit() {
+  String getSuit() {
     return suit;
   }
 
