@@ -26,4 +26,4 @@ public enum Rank {
         .findFirst()
         .orElse(HIGH_CARD);
   }
-  }
+}

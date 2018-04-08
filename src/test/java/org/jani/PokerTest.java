@@ -118,6 +118,17 @@ public class PokerTest {
 
     assertThat(result, is("Player 2 wins."));
   }
+
+  @Test
+  public void bothAreFlush() throws Exception {
+    Poker pokerA = new Poker("Player 1", "2H 4H 5H 6H AH");
+    Poker pokerB = new Poker("Player 2", "3D 8D 5D 2D 9D");
+
+    String result = pokerComparer.compare(pokerA, pokerB);
+
+    assertThat(result, is("Player 1 wins."));
+  }
 }
+
 
 
