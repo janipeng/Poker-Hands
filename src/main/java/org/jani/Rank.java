@@ -10,7 +10,8 @@ public enum Rank {
   ONE_PAIR(byModel("2 1 1 1")),
   TWO_PAIR(byModel("2 2 1")),
   THREE_OF_A_KING(byModel("3 1 1")),
-  STRAIGHT(consecutive());
+  STRAIGHT(consecutive()),
+  FLUSH(QualityBuilder.sameSuit());
 
   private Qualifier qualifier;
 

@@ -1,6 +1,7 @@
 package org.jani;
 
 import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toSet;
 
 class QualityBuilder {
   static Qualifier byModel(String model) {
@@ -17,5 +18,18 @@ class QualityBuilder {
     return poker ->
         stream(qualifierList)
             .allMatch(qualifier -> qualifier.qualify(poker));
+  }
+
+  static Qualifier sameSuit() {
+    return poker -> suitTypeSize(poker) == 1;
+  }
+
+  private static int suitTypeSize(Poker poker) {
+    return poker
+        .getCards()
+        .stream()
+        .map(Card::getSuit)
+        .collect(toSet())
+        .size();
   }
 }

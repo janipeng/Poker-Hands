@@ -6,10 +6,13 @@ import static java.lang.Integer.valueOf;
 import static java.util.Arrays.stream;
 
 public class Card implements Comparable<Card>{
+  private String suit;
   private int value;
 
   Card(String card) {
-    this.value = calValue(card.split("")[0]);
+    String[] cardSplit = card.split("");
+    this.value = calValue(cardSplit[0]);
+    this.suit = cardSplit[1];
   }
 
   private int calValue(String value) {
@@ -25,6 +28,10 @@ public class Card implements Comparable<Card>{
 
   int getValue() {
     return value;
+  }
+
+  public String getSuit() {
+    return suit;
   }
 
   private enum OfficerCards {
