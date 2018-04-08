@@ -32,4 +32,8 @@ class QualityBuilder {
         .collect(toSet())
         .size();
   }
+
+  static Qualifier straightFlush() {
+    return qualifierGroup(consecutive(), sameSuit());
+  }
 }
