@@ -13,7 +13,8 @@ public enum Rank {
   THREE_OF_A_KING(byModel("3 1 1")),
   STRAIGHT(consecutive()),
   FLUSH(sameSuit()),
-  FULL_HOUSE(byModel("3 2"));
+  FULL_HOUSE(byModel("3 2")),
+  FOUR_OF_A_KING(byModel("4 1"));
 
   private Qualifier qualifier;
 
