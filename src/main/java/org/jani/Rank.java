@@ -4,6 +4,7 @@ import static java.util.Arrays.stream;
 import static java.util.Comparator.reverseOrder;
 import static org.jani.QualityBuilder.byModel;
 import static org.jani.QualityBuilder.consecutive;
+import static org.jani.QualityBuilder.sameSuit;
 
 public enum Rank {
   HIGH_CARD(byModel("1 1 1 1 1")),
@@ -11,7 +12,8 @@ public enum Rank {
   TWO_PAIR(byModel("2 2 1")),
   THREE_OF_A_KING(byModel("3 1 1")),
   STRAIGHT(consecutive()),
-  FLUSH(QualityBuilder.sameSuit());
+  FLUSH(sameSuit()),
+  FULL_HOUSE(byModel("3 2"));
 
   private Qualifier qualifier;
 
